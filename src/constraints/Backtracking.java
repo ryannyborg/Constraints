@@ -9,75 +9,44 @@ package constraints;
 
 import java.util.ArrayList;
 
-public class Backtracking {
+public class Backtracking {	
 	
-	public static final int GRID_WIDTH = 8;
-	public static final int GRID_HEIGHT = 8;	
+	private static boolean isConsistent(int[] q, int n) {
+        for (int i = 0; i < n; i++) {
+            if (q[i] == q[n])             return false;   // same column
+            if ((q[i] - q[n]) == (n - i)) return false;   // same major diagonal
+            if ((q[n] - q[i]) == (n - i)) return false;   // same minor diagonal
+        }
+        return true;
+    }
 	
-	private char [][] BTMinus1 (int [] unlabelled, int [] labelled, char[][] grid) {
-		
-		ArrayList<Integer> unlabelledDynamic = new ArrayList<Integer>();
-		
-		for(int i=0; i<unlabelled.length; i++) {
-			unlabelledDynamic.add(unlabelled[i]);
-		}
-		
-		if(unlabelledDynamic.size() == 0) {
-			return grid;
-		} else {
-			int x = unlabelledDynamic.get(0);
-			for (int i=0; i < GRID_HEIGHT; i++) {
-				if(ConsistentCheck(labelled)) {
-					
-				}
-				
-			}
-//			return fail;
-		}
-		return grid;
-	}
-	
-	private boolean ConsistentCheck(int [] labelledColumns) {
-		// checks each constraint
-		
-		return true;
-	}
-	
-	public void BT(int [] unlabelled, int [] labelled, char[][] grid) {
-		/* This function runs the 8-queen problem using simple chronological
-		 * backtracking. 
-		*/
-		
-		// store the solution grids into an ArrayList
-		ArrayList<char[][]> solutions = new ArrayList<char[][]>(); 
-		ArrayList<char[][]> incorrect = new ArrayList<char[][]>();
-		
-		int labelColCount = 0;
-		int labelRowCount = 0;
-		int [] labelledRow = new int [8];
-		
-		
-		for(int i=0; i<GRID_WIDTH; i++) {
-			for(int j=0; j<GRID_HEIGHT; j++) {
-				
-				if(grid[i][j] == '-') {
-					//check surrounding cells
-					
-					
-					
-				} else if(grid[i][j] == 'Q') {
-					labelled[labelColCount] = i;
-					labelColCount++;
-					labelledRow[labelRowCount] = j;
-					labelRowCount++;
-				}
-				
-			}
-		}
-		
-//		BTMinus1(unlabelled, labelled, grid);
+	public static void Backtrack(int n) {
+        int[] a = new int[n];
+        Backtrack(a, 0);
+    }
 
-	}
+    public static void Backtrack(int[] q, int k) {
+        int n = q.length;
+        if (k == n) printQueens(q);
+        else {
+            for (int i = 0; i < n; i++) {
+                q[k] = i;
+                if (isConsistent(q, k)) Backtrack(q, k+1);
+            }
+        }
+    }  
+    
+    public static void printQueens(int[] q) {
+        int n = q.length;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (q[i] == j) System.out.print("Q ");
+                else           System.out.print("* ");
+            }
+            System.out.println();
+        }  
+        System.out.println();
+    }
 
 	public void ForwardChecking() {
 		// 

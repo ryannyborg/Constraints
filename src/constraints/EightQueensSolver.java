@@ -28,7 +28,7 @@ public class EightQueensSolver {
 		Scanner scanner = new Scanner(System.in);
 		
 		Backtracking solutionMethods = new Backtracking();
-		Grid grid = new Grid();
+		//Grid grid = new Grid();
 		
 		String startingQueen = "";
 		int positionOne = -1;
@@ -55,13 +55,13 @@ public class EightQueensSolver {
 			}
 		}
 		
-		char [][] startingGrid = grid.MakeGrid(startingQueen);
+//		char [][] startingGrid = grid.MakeGrid(startingQueen);
+//		
+//		grid.PrintGrid(startingGrid);
+//		int [] unlabelledColumns = grid.GetUnlabelledColumns(startingGrid);
+//		int [] labelledColumns = grid.GetLabelledColumns(startingGrid);
 		
-		grid.PrintGrid(startingGrid);
-		int [] unlabelledColumns = grid.GetUnlabelledColumns(startingGrid);
-		int [] labelledColumns = grid.GetLabelledColumns(startingGrid);
-		
-		solutionMethods.BT(unlabelledColumns, labelledColumns, startingGrid);
+		solutionMethods.Backtrack(8);
 		
 		scanner.close();
 	}
