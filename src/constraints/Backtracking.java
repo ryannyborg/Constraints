@@ -14,28 +14,36 @@ public class Backtracking {
 	public static final int GRID_WIDTH = 8;
 	public static final int GRID_HEIGHT = 8;	
 	
-	private char [][] BTMinus1 (char [][] unlabelled, char [][] labelled) {
-		if(unlabelled.length == 0) {
-			return labelled;
+	private char [][] BTMinus1 (int [] unlabelled, int [] labelled, char[][] grid) {
+		
+		ArrayList<Integer> unlabelledDynamic = new ArrayList<Integer>();
+		
+		for(int i=0; i<unlabelled.length; i++) {
+			unlabelledDynamic.add(unlabelled[i]);
+		}
+		
+		if(unlabelledDynamic.size() == 0) {
+			return grid;
 		} else {
-			char x = unlabelled[0][0];
-			for (int i=0; i < unlabelled.length; i++) {
-//				if (ConsistentCheck()) {
-//					boolean result = BTMinus1();
-//				}
+			int x = unlabelledDynamic.get(0);
+			for (int i=0; i < GRID_HEIGHT; i++) {
+				if(ConsistentCheck(labelled)) {
+					
+				}
+				
 			}
 //			return fail;
 		}
-		return unlabelled;
+		return grid;
 	}
 	
-	private void ConsistentCheck(int [] labelledColumns) {
+	private boolean ConsistentCheck(int [] labelledColumns) {
 		// checks each constraint
 		
-		
+		return true;
 	}
 	
-	public void BT(char [][] variables) {
+	public void BT(int [] unlabelled, int [] labelled, char[][] grid) {
 		/* This function runs the 8-queen problem using simple chronological
 		 * backtracking. 
 		*/
@@ -44,9 +52,30 @@ public class Backtracking {
 		ArrayList<char[][]> solutions = new ArrayList<char[][]>(); 
 		ArrayList<char[][]> incorrect = new ArrayList<char[][]>();
 		
-		char [][] labelled = new char [GRID_WIDTH][GRID_HEIGHT];
+		int labelColCount = 0;
+		int labelRowCount = 0;
+		int [] labelledRow = new int [8];
 		
-		BTMinus1(variables, labelled);
+		
+		for(int i=0; i<GRID_WIDTH; i++) {
+			for(int j=0; j<GRID_HEIGHT; j++) {
+				
+				if(grid[i][j] == '-') {
+					//check surrounding cells
+					
+					
+					
+				} else if(grid[i][j] == 'Q') {
+					labelled[labelColCount] = i;
+					labelColCount++;
+					labelledRow[labelRowCount] = j;
+					labelRowCount++;
+				}
+				
+			}
+		}
+		
+//		BTMinus1(unlabelled, labelled, grid);
 
 	}
 

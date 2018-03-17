@@ -61,7 +61,7 @@ public class EightQueensSolver {
 		int [] unlabelledColumns = grid.GetUnlabelledColumns(startingGrid);
 		int [] labelledColumns = grid.GetLabelledColumns(startingGrid);
 		
-		solutionMethods.BT(startingGrid);
+		solutionMethods.BT(unlabelledColumns, labelledColumns, startingGrid);
 		
 		scanner.close();
 	}
