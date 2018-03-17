@@ -61,7 +61,9 @@ public class EightQueensSolver {
 //		int [] unlabelledColumns = grid.GetUnlabelledColumns(startingGrid);
 //		int [] labelledColumns = grid.GetLabelledColumns(startingGrid);
 		
-		solutionMethods.Backtrack(8);
+		int initialColumn = positionTwo - 65;
+		
+		solutionMethods.Backtrack(8, initialColumn);
 		
 		scanner.close();
 	}
