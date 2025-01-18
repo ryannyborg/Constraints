@@ -14,38 +14,25 @@ public class Backtracking {
 	public int solutionNum = 1;
 	public int backtrackCounter = 0;
 	
-	private boolean isConsistent(int[] q, int n, int firstColumnSelected, int backtrackInSolution) {
-		if(q[0] == firstColumnSelected){
-		for (int i = 0; i < n; i++) {
-	            if (q[i] == q[n]){
-	            	backtrackInSolution++;
-	            	backtrackCounter++;
-	            	return false;   // same column
-	            }
-	            if ((q[i] - q[n]) == (n - i)){
-	            	backtrackInSolution++;
-	            	backtrackCounter++;
-	            	return false;   // same major diagonal
-	            }
-	            if ((q[n] - q[i]) == (n - i)){
-	            	backtrackInSolution++;
-	            	backtrackCounter++;
-	            	return false;   // same minor diagonal
-	            }
-        }
-        return true;
-		}
-		return false;
-    }
-	
-	public void Backtrack(int n, int firstColumnSelected) {
+	public void Backtrack(int n, int firstColumnSelected, String type) {
         int[] a = new int[n];
-        Backtrack(a, 0, firstColumnSelected);
-        System.out.print("Total number of backtracks before all solutions were found (or found there are no solutions): \n");
-        System.out.print("Chronologic Backtracking: " + backtrackCounter + "\n");
+        
+        switch(type) {
+        	case "chronological":
+                ChronologicalBacktrack(a, 0, firstColumnSelected);
+                System.out.print("Total number of backtracks before all solutions were found (or found there are no solutions): \n");
+                System.out.print("Chronologic Backtracking: " + backtrackCounter + "\n\n");
+                break;
+        	case "forward":
+        		System.out.print("Forward Checking not implemented.\n");
+        		break;
+        	case "directional":
+        		System.out.print("Directional Arc Consistency Look-Ahead not implemented.\n");
+        		break;
+        }
     }
 
-    public void Backtrack(int[] q, int k, int firstColumnSelected) {
+    public void ChronologicalBacktrack(int[] q, int k, int firstColumnSelected) {
         int n = q.length;
         int backtrackInSolution = 0;
         if (k == n) printQueens(q, firstColumnSelected, backtrackInSolution);
@@ -53,13 +40,22 @@ public class Backtracking {
             for (int i = 0; i < n; i++) {
                 q[k] = i;
                 if (isConsistent(q, k, firstColumnSelected, backtrackInSolution)){
-                	Backtrack(q, k+1, firstColumnSelected);
+                	ChronologicalBacktrack(q, k+1, firstColumnSelected);
                 }
             }
         }
-    }  
-    
-    public void printQueens(int[] q, int firstColumnSelected, int backtrackInSolution) {
+    }
+
+	public void ForwardChecking() {
+		// Forward Checking
+	}
+	
+	public void DirectionalArc() {
+		// Full name: Directional Arc Consistency Look-Ahead
+		
+	}
+	
+    private void printQueens(int[] q, int firstColumnSelected, int backtrackInSolution) {
         int n = q.length;
         if(q[0] == firstColumnSelected){
 	        for (int i = 0; i < n; i++) {
@@ -81,14 +77,28 @@ public class Backtracking {
         System.out.println();
         }
     }
-
-	public void ForwardChecking() {
-		// 
-	}
 	
-	public void DirectionalArc() {
-		// Full name: Directional Arc Consistency Look-Ahead
-		
-	}
-
+	private boolean isConsistent(int[] q, int n, int firstColumnSelected, int backtrackInSolution) {
+		if(q[0] == firstColumnSelected){
+			for (int i = 0; i < n; i++) {
+		            if (q[i] == q[n]){
+		            	backtrackInSolution++;
+		            	backtrackCounter++;
+		            	return false;   // same column
+		            }
+		            if ((q[i] - q[n]) == (n - i)){
+		            	backtrackInSolution++;
+		            	backtrackCounter++;
+		            	return false;   // same major diagonal
+		            }
+		            if ((q[n] - q[i]) == (n - i)){
+		            	backtrackInSolution++;
+		            	backtrackCounter++;
+		            	return false;   // same minor diagonal
+		            }
+	        }
+			return true;
+		}
+		return false;
+    }
 }

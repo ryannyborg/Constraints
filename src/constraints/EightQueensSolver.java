@@ -63,7 +63,9 @@ public class EightQueensSolver {
 		
 		int initialColumn = positionTwo - 65;
 		
-		solutionMethods.Backtrack(8, initialColumn);
+		solutionMethods.Backtrack(8, initialColumn, "chronological");
+		solutionMethods.Backtrack(8, initialColumn, "forward");
+		solutionMethods.Backtrack(8, initialColumn, "directional");
 		
 		scanner.close();
 	}
